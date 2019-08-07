@@ -1,20 +1,19 @@
-import Observable from "./Observable";
+import Memento from "./Memento";
 
-const subject = new Observable();
+class Car extends Memento {
 
-function functionOne(text) {
-    console.log(`Function one ${text}`);
+    constructor(name, model) {
+        super();
+        this.name = name;
+        this.model = model;
+    }
 }
 
-function functionTwo(text) {
-    console.log(`Function two ${text}`);
-}
-
-subject.subscribe(functionOne);
-subject.subscribe(functionTwo);
-
-subject.notify("Hello World!");
-
-subject.unsubscribe(functionOne);
-
-subject.notify("Jonathan is the best!");
+let ferrari = new Car("Ferrari", "220");
+console.log(ferrari);
+let saveState = ferrari.hydrante();
+console.log(saveState);
+ferrari.name = "Renault";
+console.log(ferrari);
+ferrari.dehydrate(saveState);
+console.log(ferrari);
